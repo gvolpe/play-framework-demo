@@ -11,8 +11,8 @@ case class ProductNotFoundException() extends Exception
 object ProductsRepository {
 
   val products = new HashMap[Long, Product]
-  products.put(1, Product(1, "keyboard"))
-  products.put(2, Product(2, "mouse"))
+  products.put(1, Product(1, "keyboard", 24.37))
+  products.put(2, Product(2, "mouse", 5.79))
 
   def findAll: List[Product] = {
     products.map(p => p._2).toList
