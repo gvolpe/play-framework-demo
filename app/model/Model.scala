@@ -4,7 +4,7 @@ import play.api.libs.json.Json
 
 object Model {
 
-  case class BaseProduct(name: String)
+  case class BaseProduct(name: String, price: Double)
   case class Product(id: Long, name: String, price: Double)
 
   object Implicits {
