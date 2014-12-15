@@ -36,8 +36,10 @@ object ProductsController extends Controller {
   }
 
   def save = Action(parse.json) { implicit request =>
-    val product = Json.fromJson[BaseProduct](request.body).asOpt.get
-    Ok(Json.toJson(Product(Random.nextInt(100), product.name)))
+    val baseProduct = Json.fromJson[BaseProduct](request.body).asOpt.get
+    val product = Product(Random.nextInt(100), baseProduct.name)
+    ProductsRepository.save(product)
+    Ok(Json.toJson(product))
   }
 
 }

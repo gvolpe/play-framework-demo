@@ -26,4 +26,8 @@ object ProductsRepository {
     products.get(id)
   }
 
+  def save(product: Product): Unit = {
+    products.put(product.id, product)
+  }
+
 }
