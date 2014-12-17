@@ -1,9 +1,11 @@
 package controllers
 
 import model.Model.{BaseProduct, Product}
+import play.api.cache.Cached
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.Play.current
 import repository.{ProductNotFoundException, ProductsRepository}
 
 import scala.util.{Success, Random}
@@ -12,9 +14,11 @@ object ProductsController extends Controller {
 
   import model.Model.Implicits._
 
-  def findAll = Action {
-    val products: List[Product] = ProductsRepository.findAll
-    Ok(Json.toJson(products))
+  def findAll = Cached("products") {
+    Action {
+      val products: List[Product] = ProductsRepository.findAll
+      Ok(Json.toJson(products))
+    }
   }
 
   def findById(id: Long) = Action.async {
