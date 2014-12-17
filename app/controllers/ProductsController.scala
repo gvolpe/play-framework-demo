@@ -1,14 +1,13 @@
 package controllers
 
 import model.Model.{BaseProduct, Product}
+import play.api.Play.current
 import play.api.cache.Cached
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
-import play.api.Play.current
 import repository.{ProductNotFoundException, ProductsRepository}
-
-import scala.util.{Success, Random}
+import scala.util.Random
 
 object ProductsController extends Controller {
 
